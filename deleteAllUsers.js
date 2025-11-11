@@ -8,7 +8,13 @@ let confirmDelete = false;
 
 async function deleteAllUsers() {
   users = await getUsers();
-  console.log(users);
+  if (!confirmDelete) {
+    console.log("USERS:");
+    console.log(users);
+    console.log("Please set confirmDelete to true to delete users");
+    return;
+  }
+
   users.forEach((user) => {
     if (!allowed.includes(user.username) && confirmDelete) {
       deleteUser(user.username, username, password);
@@ -20,7 +26,6 @@ deleteAllUsers();
 
 async function getUsers() {
   const url = new URL(`https://git.floatingpoint.ch/api/v1/admin/users`);
-  url.searchParams.set("limit", "100");
 
   const response = await fetch(url.toString(), {
     method: "GET",
