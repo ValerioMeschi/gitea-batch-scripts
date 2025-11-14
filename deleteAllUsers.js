@@ -25,7 +25,7 @@ async function deleteAllUsers() {
 deleteAllUsers();
 
 async function getUsers() {
-  const url = new URL(`https://git.floatingpoint.ch/api/v1/admin/users`);
+  const url = new URL(`${baseURL}/api/v1/admin/users`);
 
   const response = await fetch(url.toString(), {
     method: "GET",
@@ -47,9 +47,7 @@ async function getUsers() {
 
 async function deleteUser(targetUsername, authUser, authPass) {
   const url = new URL(
-    `https://git.floatingpoint.ch/api/v1/admin/users/${encodeURIComponent(
-      targetUsername,
-    )}`,
+    `${baseURL}/api/v1/admin/users/${encodeURIComponent(targetUsername)}`,
   );
   url.searchParams.set("purge", "true");
 
